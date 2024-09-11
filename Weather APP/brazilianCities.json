@@ -1,0 +1,52 @@
+{
+  "Goi\u00e1s": {
+    "uf": "GO",
+    "latitude": -15.9333,
+    "longitude": -50.14,
+    "regiao": "Centro-Oeste"
+  },
+  "Tocantins": {
+    "uf": "TO",
+    "latitude": -21.1774,
+    "longitude": -43.0127,
+    "regiao": "Norte"
+  },
+  "Esp\u00edrito Santo": {
+    "uf": "ES",
+    "latitude": -6.33563,
+    "longitude": -35.3052,
+    "regiao": "Sudeste"
+  },
+  "Paran\u00e1": {
+    "uf": "PR",
+    "latitude": -6.47565,
+    "longitude": -38.3057,
+    "regiao": "Sul"
+  },
+  "S\u00e3o Paulo": {
+    "uf": "SP",
+    "latitude": -23.5329,
+    "longitude": -46.6395,
+    "regiao": "Sudeste"
+  },
+  "Mato Grosso": {
+    "uf": "MT",
+    "latitude": -6.54018,
+    "longitude": -37.7279,
+    "regiao": "Centro-Oeste"
+  },
+  "Amap\u00e1": {
+    "uf": "AP",
+    "latitude": 2.05267,
+    "longitude": -50.7957,
+    "regiao": "Norte"
+  },
+  "Rio de Janeiro": {
+    "uf": "RJ",
+    "latitude": -22.9129,
+    "longitude": -43.2003,
+    "regiao": "Sudeste"
+  }
+}
+
+

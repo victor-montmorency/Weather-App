@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     
     private lazy var backgroundView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(named: "background")
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -22,7 +21,7 @@ class ViewController: UIViewController {
     private lazy var headerView: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.softGray
+        view.backgroundColor = UIColor.clear
         view.layer.cornerRadius = 20
         return view
     }()
@@ -48,7 +47,7 @@ class ViewController: UIViewController {
     private lazy var weatherIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "sunIcon")
+
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -107,7 +106,7 @@ class ViewController: UIViewController {
         let stackview = UIStackView(arrangedSubviews: [humidityStackView, windStackView])
         stackview.axis = .vertical
         stackview.spacing = 3
-        stackview.backgroundColor = UIColor.softGray
+        stackview.backgroundColor = UIColor.clear
         stackview.layer.cornerRadius = 10
         stackview.isLayoutMarginsRelativeArrangement = true
         stackview.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 12, leading: 24, bottom: 12, trailing: 24)
@@ -160,7 +159,7 @@ class ViewController: UIViewController {
     } ()
     
     private let service = Service()
-    private var city = City(lat: "-25.4269", lon: "-49.2652", name: "Curitiba")
+    private var city = City(lat: "-3.7327", lon: "-38.5270", name: "Fortaleza")
     private var forecastResponse: ForecastResponse?
     
     
@@ -185,6 +184,13 @@ class ViewController: UIViewController {
         temperatureLabel.text = forecastResponse?.current.temp.toCelsius()
         humidityValueLabel.text = "\(forecastResponse?.current.humidity ?? 0) %"
         windValueLabel.text = "\(forecastResponse?.current.windSpeed ?? 0) KM/H"
+        weatherIcon.image = UIImage(named: "\(forecastResponse?.current.weather[0].icon ?? "")")
+        if forecastResponse?.current.weather[0].icon.last != "n" {
+            backgroundView.image = UIImage(named: "backgroundDay")
+        } else {
+            backgroundView.image = UIImage(named: "backgroundNight")
+        }
+
         
         hourlyCollectionView.reloadData()
         dailyForecastTableView.reloadData()
@@ -244,13 +250,13 @@ class ViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            statsStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 24),
+            statsStackView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             statsStackView.widthAnchor.constraint(equalToConstant: 206),
             statsStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            hourlyForecastLabel.topAnchor.constraint(equalTo: statsStackView.bottomAnchor, constant: 29),
+            hourlyForecastLabel.topAnchor.constraint(equalTo: statsStackView.bottomAnchor, constant: 70),
             hourlyForecastLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 35),
             hourlyForecastLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -35),
             hourlyCollectionView.topAnchor.constraint(equalTo: hourlyForecastLabel.bottomAnchor, constant: 22),
@@ -283,7 +289,7 @@ extension ViewController: UICollectionViewDataSource {
         
         let forecast = forecastResponse?.hourly[indexPath.row
         ]
-        cell.loadData(time: forecast?.dt.toHourFormat(), icon: UIImage(named: "sunIcon"), temp: forecast?.temp.toCelsius())
+        cell.loadData(time: forecast?.dt.toHourFormat(), icon: UIImage(named: "\(forecast?.weather[0].icon ?? "")"), temp: forecast?.temp.toCelsius())
         return cell
     }
 }
@@ -299,9 +305,7 @@ extension ViewController: UITableViewDataSource {
         }
         
         let forecast = forecastResponse?.daily[indexPath.row]
-        cell.loadData(weekDay: forecast?.dt.toWeekdayName(), min: forecast?.temp.min.toCelsius(), max: forecast?.temp.max.toCelsius(), icon: UIImage(named: "cloudIcon"))
-            
-        
+        cell.loadData(weekDay: forecast?.dt.toWeekdayName(), min: forecast?.temp.min.toCelsius(), max: forecast?.temp.max.toCelsius(), icon: UIImage(named: "\(forecast?.weather[0].icon ?? "")"))
         return cell
     }
     

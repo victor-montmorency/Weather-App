@@ -14,7 +14,7 @@ class DailyForecastTableViewCell: UITableViewCell {
     private lazy var weekDayLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.colorPrimary
+        label.textColor = UIColor.colorContrast
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return label
     } ()
@@ -22,7 +22,7 @@ class DailyForecastTableViewCell: UITableViewCell {
     private lazy var minTemperatureLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.colorPrimary
+        label.textColor = UIColor.colorContrast
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return label
     } ()
@@ -30,7 +30,7 @@ class DailyForecastTableViewCell: UITableViewCell {
     private lazy var maxTemperatureLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = UIColor.colorPrimary
+        label.textColor = UIColor.colorContrast
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return label
     } ()
@@ -39,6 +39,9 @@ class DailyForecastTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
+        
+        
+        
         
         return imageView
     }()
@@ -53,6 +56,10 @@ class DailyForecastTableViewCell: UITableViewCell {
         stackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.spacing = 15
+        stackView.alignment = .center
+        
+        
+            
         return stackView
     }()
     
@@ -85,10 +92,12 @@ class DailyForecastTableViewCell: UITableViewCell {
     }
     
     private func setConstraints(){
+        
         stackView.setConstraintsToParent(contentView)
         NSLayoutConstraint.activate([
-            weekDayLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 40),
+            weekDayLabel.widthAnchor.constraint(equalToConstant: 50),
             iconImageView.heightAnchor.constraint(equalToConstant: 30)
+
         ])
     }
 }

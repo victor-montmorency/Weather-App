@@ -18,6 +18,7 @@
 		9BFFC4722C901D030081318F /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFC4712C901D030081318F /* UIView+Extensions.swift */; };
 		9BFFC4742C9033B00081318F /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFC4732C9033B00081318F /* Service.swift */; };
 		9BFFC4762C91D2CF0081318F /* Core+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFFC4752C91D2CF0081318F /* Core+Extensions.swift */; };
+		9BFFC4782C9239B80081318F /* brazilianCities.json in Resources */ = {isa = PBXBuildFile; fileRef = 9BFFC4772C9239B80081318F /* brazilianCities.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		9BFFC4712C901D030081318F /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		9BFFC4732C9033B00081318F /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		9BFFC4752C91D2CF0081318F /* Core+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core+Extensions.swift"; sourceTree = "<group>"; };
+		9BFFC4772C9239B80081318F /* brazilianCities.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = brazilianCities.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				9BFFC4572C8DB9AE0081318F /* AppDelegate.swift */,
 				9BFFC4592C8DB9AE0081318F /* SceneDelegate.swift */,
 				9BFFC45B2C8DB9AE0081318F /* ViewController.swift */,
+				9BFFC4772C9239B80081318F /* brazilianCities.json */,
 				9BFFC4602C8DB9B00081318F /* Assets.xcassets */,
 				9BFFC4622C8DB9B00081318F /* LaunchScreen.storyboard */,
 				9BFFC4652C8DB9B00081318F /* Info.plist */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BFFC4612C8DB9B00081318F /* Assets.xcassets in Resources */,
+				9BFFC4782C9239B80081318F /* brazilianCities.json in Resources */,
 				9BFFC4642C8DB9B00081318F /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
