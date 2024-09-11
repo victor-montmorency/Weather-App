@@ -14,3 +14,4 @@ extension UIColor{
     static let softGray = UIColor(named: "graySoft")
 
 }
+
