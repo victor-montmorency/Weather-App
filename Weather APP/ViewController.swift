@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
     
     
@@ -26,13 +27,37 @@ class ViewController: UIViewController {
         return view
     }()
     
+    private lazy var switchLocationButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "editIcon")
+        button.imageView?.contentMode = .scaleAspectFit
+        button.setTitle("trocar localização", for: .normal)
+        button.setImage(image, for: .normal)
+        button.tintColor = .contrastColor
+        button.addTarget(self, action: #selector(showStates), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        return button
+    }()
+    
+    
+    
     private lazy var cityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .center
         label.textColor = UIColor.colorContrast
+        
         return label
+    } ()
+    
+    private lazy var cityStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [cityLabel, switchLocationButton])
+        stackView.axis = .horizontal
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+        
     } ()
     
     private lazy var temperatureLabel: UILabel = {
@@ -158,8 +183,10 @@ class ViewController: UIViewController {
         return tableView
     } ()
     
+
+    
     private let service = Service()
-    private var city = City(lat: "-3.7327", lon: "-38.5270", name: "Fortaleza")
+    var city = City(lat: LocationDataManager.shared.latitude, lon: LocationDataManager.shared.longitude, name: LocationDataManager.shared.cityName)
     private var forecastResponse: ForecastResponse?
     
     
@@ -194,6 +221,7 @@ class ViewController: UIViewController {
         
         hourlyCollectionView.reloadData()
         dailyForecastTableView.reloadData()
+        print(loadAndPrintStateKeys(from: "brazilianCities"))
     }
 
     private func setupView(){
@@ -211,9 +239,10 @@ class ViewController: UIViewController {
         view.addSubview(dailyForecastLabel)
         view.addSubview(dailyForecastTableView)
 
-        headerView.addSubview(cityLabel)
+        headerView.addSubview(cityStackView)
         headerView.addSubview(temperatureLabel)
         headerView.addSubview(weatherIcon)
+
 
 
     }
@@ -234,11 +263,12 @@ class ViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            cityLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 15),
-            cityLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 15),
-            cityLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -15),
-            cityLabel.heightAnchor.constraint(equalToConstant: 20),
-            temperatureLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 10),
+            switchLocationButton.heightAnchor.constraint(equalToConstant: 25),
+            switchLocationButton.widthAnchor.constraint(equalToConstant: 50),
+            cityStackView.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 15),
+            cityLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            temperatureLabel.topAnchor.constraint(equalTo: cityStackView.bottomAnchor, constant: 30),
             temperatureLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 20),
             temperatureLabel.heightAnchor.constraint(equalToConstant: 71),
             weatherIcon.heightAnchor.constraint(equalToConstant: 86),
@@ -275,6 +305,18 @@ class ViewController: UIViewController {
             dailyForecastTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    @objc private func showStates() {
+        // Call the working function that returns the array of states
+        let states = loadAndPrintStateKeys(from: "brazilianCities")
+        
+        // Initialize the StringTableViewController and pass the states
+        let stringVC = StringTableViewController()
+        stringVC.data = states
+        stringVC.modalPresentationStyle = .pageSheet
+        self.present(stringVC, animated: true)
+        
+    }
+    
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -311,3 +353,4 @@ extension ViewController: UITableViewDataSource {
     
     
 }
+
